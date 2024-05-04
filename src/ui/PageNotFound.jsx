@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const StyledPageNotFound = styled.main`
   height: 100vh;
@@ -25,11 +26,12 @@ const Box = styled.div`
 `;
 
 function PageNotFound() {
+  const navigate = useNavigate();
   return (
     <StyledPageNotFound>
       <Box>
         <p>The page you are looking for could not be found 😢</p>
-        <button onClick={() => console.log('ae')}>&larr; Go back</button>
+        <button onClick={() => navigate(-1)}>&larr; Go back</button>
       </Box>
     </StyledPageNotFound>
   );

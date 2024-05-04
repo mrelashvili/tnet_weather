@@ -70,9 +70,9 @@ const WeatherCard = () => {
   if (!weather) return null;
 
   return (
-    <div className="bg-gray-200 rounded-[2.5rem] flex gap-10">
+    <div className="bg-gray-200 rounded-[2.5rem] flex max-[1080px]:flex-col gap-10">
       <div className="flex flex-col bg-white rounded-bl-[2.5rem] rounded-tl-[2.5rem] p-10">
-        <div className="flex gap-5">
+        <div className="flex gap-5 justify-center">
           <input
             type="text"
             placeholder="Search for places..."

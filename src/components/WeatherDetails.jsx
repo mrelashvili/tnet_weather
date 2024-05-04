@@ -4,7 +4,6 @@ import WeatherInfo from './WeatherInfo';
 import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa';
 import { formatTime } from '../utils/sunsetAndSunrise';
 import HumidityChart from '../charts/HumidityChart';
-import WindSpeedChart from '../charts/WindSpeedChart';
 
 const WeatherDetails = ({ weather }) => {
   const sunrise = formatTime(weather.sys.sunrise);
@@ -13,7 +12,7 @@ const WeatherDetails = ({ weather }) => {
   const visibilityVal = weather.visibility / 1000;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-auto py-10 pr-[2.5rem]">
+    <div className="grid grid-cols-3 gap-4 mt-auto py-10 pr-[2.5rem] max-[1080px]:pl-[2.5rem] max-[750px]:grid-cols-2 max-[500px]:grid-cols-1">
       <WeatherInfo label="Humidity" className="text-center">
         <HumidityChart humidity={weather.main.humidity} width={1000} />
       </WeatherInfo>

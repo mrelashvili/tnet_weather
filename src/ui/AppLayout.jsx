@@ -24,9 +24,9 @@ const Container = styled.div`
 
 function AppLayout() {
   return (
-    <Container>
+    <div>
       <Outlet />
-    </Container>
+    </div>
   );
 }
 
