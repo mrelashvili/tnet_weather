@@ -6,7 +6,7 @@ const ArrowIcon = ({ deg }) => {
   };
 
   return (
-    <div className="arrow-icon" style={style}>
+    <div className="arrow-icon text-red-600 font-bold" style={style}>
       &#8594;
     </div>
   );

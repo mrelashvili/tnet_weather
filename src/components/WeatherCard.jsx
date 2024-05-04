@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaLongArrowAltRight } from 'react-icons/fa';
 import axios from 'axios';
 import Spinner from '../ui/Spinner';
 import WeatherDetails from './WeatherDetails';
@@ -71,14 +72,21 @@ const WeatherCard = () => {
   return (
     <div className="bg-gray-200 rounded-[2.5rem] flex gap-10">
       <div className="flex flex-col bg-white rounded-bl-[2.5rem] rounded-tl-[2.5rem] p-10">
-        <input
-          type="text"
-          placeholder="Search for places..."
-          value={location}
-          onChange={handleLocationChange}
-          className="p-2 border rounded-lg focus:outline-none focus:ring-2"
-        />
-        <button onClick={handleSubmit}>click</button>
+        <div className="flex gap-5">
+          <input
+            type="text"
+            placeholder="Search for places..."
+            value={location}
+            onChange={handleLocationChange}
+            className="p-2 border rounded-lg focus:outline-none hover:scale-x-105 transition-all duration-300"
+          />
+          <button
+            onClick={handleSubmit}
+            className="hover:translate-x-0.5 transition-all duration-300"
+          >
+            <FaLongArrowAltRight />
+          </button>
+        </div>
         <div className="py-10 items-center flex flex-col">
           <img
             src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
@@ -94,7 +102,7 @@ const WeatherCard = () => {
               {weather.main.temp} <span>℃</span>
             </p>
 
-            <p className="pb-5 border-b text-[25px]">
+            <p className="pb-5 border-b text-[25px] text-gray-400">
               Feels like - {weather.main.feels_like} <span>℃</span>
             </p>
           </div>

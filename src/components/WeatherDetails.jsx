@@ -3,6 +3,8 @@ import ArrowIcon from '../ui/ArrowIcon';
 import WeatherInfo from './WeatherInfo';
 import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa';
 import { formatTime } from '../utils/sunsetAndSunrise';
+import HumidityChart from '../charts/HumidityChart';
+import WindSpeedChart from '../charts/WindSpeedChart';
 
 const WeatherDetails = ({ weather }) => {
   const sunrise = formatTime(weather.sys.sunrise);
@@ -12,49 +14,58 @@ const WeatherDetails = ({ weather }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-auto py-10 pr-[2.5rem]">
+      <WeatherInfo label="Humidity" className="text-center">
+        <HumidityChart humidity={weather.main.humidity} width={1000} />
+      </WeatherInfo>
       <WeatherInfo
-        label="Humidity"
-        value={`${weather.main.humidity}%`}
+        label="Wind Speed"
+        value={`${weather.wind.speed} km/h`}
         className="text-center"
-      />
-      <div>
-        <WeatherInfo
-          label="Wind Speed"
-          value={`${weather.wind.speed} km/h`}
-          className="text-center"
-        >
-          <div className="text-center flex flex-col gap-2 items-center">
-            <p>Wind Direction</p>
-            <ArrowIcon deg={weather.wind.deg} />
+        font
+      >
+        <div className="text-center flex flex-col gap-2 items-center">
+          <div className="flex gap-3">
+            Wind Direction
+            <span>
+              <ArrowIcon deg={weather.wind.deg} />
+            </span>
           </div>
-        </WeatherInfo>
-      </div>
-      <WeatherInfo
-        label="Condition"
-        value="Mostly Cloudy"
-        className="text-center"
-      />
+        </div>
+      </WeatherInfo>
+      <WeatherInfo label="Coordinates" className="text-center">
+        <p>
+          Latitude: <span>{weather.coord.lon} &#xb0;</span>
+        </p>
+        <p>
+          Longitude: <span>{weather.coord.lat} &#xb0;</span>
+        </p>
+      </WeatherInfo>
 
       <WeatherInfo
-        label="Rain Probability"
-        value="30%"
+        label="Atmospheric Pressure"
+        value={`${weather.main.pressure} mb (millibar)`}
         className="text-center"
       />
       <WeatherInfo label="Sunrise & Sunset" className="text-center">
         <div className="flex flex-col gap-5 items-center">
           <div className="flex items-center">
-            <FaArrowAltCircleUp /> <span>{sunrise}</span>
+            <p className="flex gap-2 items-center w-28">
+              <FaArrowAltCircleUp className="text-orange-500" />
+              <span>{sunrise}</span>
+            </p>
           </div>
           <div className="flex items-center">
-            <FaArrowAltCircleDown /> <p>{sunset}</p>
+            <p className="flex gap-2 items-center w-28">
+              <FaArrowAltCircleDown className="text-orange-500" />
+              <span>{sunset}</span>
+            </p>
           </div>
         </div>
       </WeatherInfo>
-      <WeatherInfo
-        label="Visibility"
-        value={`${visibilityVal} km`}
-        className="text-center"
-      />
+      <WeatherInfo label="Cloud cover & Visibility" className="text-center">
+        <p>Cloud Cover: {`${weather.clouds.all} %`}</p>
+        <p>Visibility: {`${visibilityVal} km`}</p>
+      </WeatherInfo>
     </div>
   );
 };
