@@ -20,7 +20,6 @@ const WeatherDetails = ({ weather }) => {
         label="Wind Speed"
         value={`${weather.wind.speed} km/h`}
         className="text-center"
-        font
       >
         <div className="text-center flex flex-col gap-2 items-center">
           <div className="flex gap-3">
@@ -31,12 +30,13 @@ const WeatherDetails = ({ weather }) => {
           </div>
         </div>
       </WeatherInfo>
+
       <WeatherInfo label="Coordinates" className="text-center">
         <p>
-          Latitude: <span>{weather.coord.lon} &#xb0;</span>
+          Latitude: <span>{weather.coord.lon}&#xb0;</span>
         </p>
         <p>
-          Longitude: <span>{weather.coord.lat} &#xb0;</span>
+          Longitude: <span>{weather.coord.lat}&#xb0;</span>
         </p>
       </WeatherInfo>
 
