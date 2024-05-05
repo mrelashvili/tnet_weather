@@ -6,8 +6,8 @@ import { formatTime } from '../utils/sunsetAndSunrise';
 import HumidityChart from '../charts/HumidityChart';
 
 const WeatherDetails = ({ weather }) => {
-  const sunrise = formatTime(weather.sys.sunrise);
-  const sunset = formatTime(weather.sys.sunset);
+  const sunrise = formatTime(weather.sys.sunrise, weather.timezone / 3600);
+  const sunset = formatTime(weather.sys.sunset, weather.timezone / 3600);
 
   const visibilityVal = weather.visibility / 1000;
 
