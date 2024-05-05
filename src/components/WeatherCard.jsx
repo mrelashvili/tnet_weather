@@ -25,54 +25,57 @@ const WeatherCard = () => {
     );
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const loc = inputRef.current.value;
 
-    try {
-      setLoading(true);
-      setError(null);
+    if (!loc) {
+      setError(ERROR_MESSAGES.INVALID_CITY);
+      return;
+    }
 
-      fetchWeather(
-        inputRef.current.value,
-        setWeather,
-        import.meta.env.VITE_API_KEY
-      );
-    } catch (err) {
-      setError(err);
-      setLoading(false);
-    } finally {
-      setLoading(false);
+    const result = await fetchWeather(loc, import.meta.env.VITE_API_KEY);
+
+    if (result.error) {
+      setError(result.error);
+    } else {
+      setWeather(result);
+      setError('');
+      inputRef.current.value = '';
     }
   };
 
-  if (error) return <h1>{error}</h1>;
-  if (loading) return <Spinner />;
-  if (!weather) return null;
+  if (loading || !weather) return <Spinner />;
 
   return (
     <div className="bg-gray-200 rounded-[2.5rem] flex max-[1080px]:flex-col gap-10">
-      <div className="flex flex-col bg-white rounded-bl-[2.5rem] rounded-tl-[2.5rem] p-10">
+      <div className="flex flex-col bg-white rounded-bl-[2.5rem] max-[1080px]:rounded-bl-[0] rounded-tl-[2.5rem] max-[1080px]:rounded-tr-[2.5rem] p-10">
         <div className="flex gap-5 justify-center">
-          <input
-            type="text"
-            ref={inputRef}
-            placeholder="Search for places..."
-            className="p-2 border rounded-lg focus:outline-none hover:scale-x-105 transition-all duration-300"
-          />
-          <button
-            onClick={handleSubmit}
-            className="hover:translate-x-0.5 transition-all duration-300"
-          >
-            <FaLongArrowAltRight />
-          </button>
+          <div>
+            <form className="flex gap-4" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                ref={inputRef}
+                placeholder="Search for places..."
+                className="p-2 border rounded-lg focus:outline-none hover:scale-x-105 transition-all duration-300"
+              />
+              <button
+                className="hover:translate-x-0.5 transition-all duration-300"
+                aria-label="Submit"
+              >
+                <FaLongArrowAltRight />
+              </button>
+            </form>
+            {error && <h1 className="text-left text-red-700 mt-3">{error}</h1>}
+          </div>
         </div>
         <div className="py-10 items-center flex flex-col">
           <img
-            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`}
             alt=""
             className="min-h-[120px] rounded-[100px]"
           />
-          <p className="text-red-600 font-bold	text-lg">
+          <p className="text-red-600 font-bold text-lg">
             {weather.weather[0].description}
           </p>
 
@@ -92,7 +95,7 @@ const WeatherCard = () => {
       <div className="flex flex-col flex-1">
         <p className="mt-7 text-[20px] sm:text-[40px] md:text-[80px] text-red-600">
           {weather.name}
-          <span className="text-lg"> {weather.sys.country}</span>
+          <span className="text-lg text-gray-600"> {weather.sys.country}</span>
         </p>
 
         <WeatherDetails weather={weather} />
