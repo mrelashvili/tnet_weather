@@ -26,7 +26,7 @@ const CurrentDateTime = () => {
 
   return (
     <div>
-      <p>
+      <p className="text-[28px]">
         {dayOfWeek}, {hours > 12 ? hours - 12 : hours}:
         {minutes < 10 ? '0' + minutes : minutes} {hours >= 12 ? 'PM' : 'AM'}
       </p>
