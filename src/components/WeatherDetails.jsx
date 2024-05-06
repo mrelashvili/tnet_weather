@@ -48,13 +48,13 @@ const WeatherDetails = ({ weather }) => {
       <WeatherInfo label="Sunrise & Sunset" className="text-center">
         <div className="flex flex-col gap-5 items-center">
           <div className="flex items-center">
-            <p className="flex gap-2 items-center w-28">
+            <p className="flex gap-2 items-center w-28 text-lg">
               <FaArrowAltCircleUp className="text-orange-500" />
               <span>{sunrise}</span>
             </p>
           </div>
           <div className="flex items-center">
-            <p className="flex gap-2 items-center w-28">
+            <p className="flex gap-2 items-center w-28 text-lg">
               <FaArrowAltCircleDown className="text-orange-500" />
               <span>{sunset}</span>
             </p>
