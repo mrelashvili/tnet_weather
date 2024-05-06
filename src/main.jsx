@@ -10,14 +10,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route element={<AppLayout />}>
-          <Route index element={<Navigate replace to="/" />} />
-          <Route element={<App />} />
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<App />} />
+          <Route path="*" element={<PageNotFound />} />
         </Route>
-
-        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
-    <App />
   </React.StrictMode>
 );
