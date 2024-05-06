@@ -95,7 +95,10 @@ const WeatherCard = () => {
       <div className="flex flex-col flex-1">
         <p className="mt-7 text-[20px] sm:text-[40px] md:text-[80px] text-red-600">
           {weather.name}
-          <span className="text-lg text-gray-600"> {weather.sys.country}</span>
+          <span className="md:text-lg text-gray-600 text-[10px]">
+            {' '}
+            {weather.sys.country}
+          </span>
         </p>
 
         <WeatherDetails weather={weather} />
